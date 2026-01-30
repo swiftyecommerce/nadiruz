@@ -6,6 +6,7 @@ import { Shows } from "@/components/sections/Shows";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
+import { Navbar } from "@/components/Navbar";
 
 import prisma from "@/lib/prisma";
 
@@ -66,14 +67,30 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col">
+      <Navbar />
       <Hero profile={data.profile} featuredVideo={data.featuredVideo} />
-      <LatestRelease release={data.featuredRelease} />
-      <MusicPlatforms links={data.socialLinks} />
-      <VideoGallery videos={data.videos} />
-      <Shows shows={data.shows} />
-      <About profile={data.profile} />
-      <Contact contact={data.contact} />
-      <Footer socialLinks={data.socialLinks} />
+
+      <div id="music">
+        <LatestRelease release={data.featuredRelease} />
+        <MusicPlatforms links={data.socialLinks} />
+      </div>
+
+      <div id="videos">
+        <VideoGallery videos={data.videos} />
+      </div>
+
+      <div id="shows">
+        <Shows shows={data.shows} />
+      </div>
+
+      <div id="about">
+        <About profile={data.profile} />
+      </div>
+
+      <div id="contact">
+        <Contact contact={data.contact} />
+        <Footer socialLinks={data.socialLinks} />
+      </div>
     </main>
   );
 }
