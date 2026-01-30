@@ -44,17 +44,13 @@ export function Footer({ socialLinks }: FooterProps) {
                         <h2 className="text-3xl font-oswald font-bold tracking-widest bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
                             NADİR UZ
                         </h2>
-                        <p className="text-gray-500 text-sm font-medium">
-                            &copy; {currentYear} Nadir UZ. Tüm hakları saklıdır.
-                        </p>
+                        <div className="text-gray-500 text-[11px] leading-relaxed max-w-xl">
+                            <Link href="/admin" className="hover:text-white transition-colors">Swifty.MP | Sanatçı Yönetim Paneli</Link>,
+                            <a href="https://swifty.com.tr" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors ml-1">
+                                Swifty E-Ticaret ve Dijital Pazarlama Ajansı
+                            </a> tarafından geliştirilmiştir. Tüm Hakları Saklıdır.
+                        </div>
                     </div>
-
-                    <Link
-                        href="/admin"
-                        className="text-[10px] uppercase tracking-[0.2em] text-gray-700 hover:text-[#39ff14] transition-colors"
-                    >
-                        Yönetim Paneli Girişi
-                    </Link>
                 </div>
             </div>
         </footer>
