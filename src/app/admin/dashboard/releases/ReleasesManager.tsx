@@ -93,7 +93,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Delete this release?")) return;
+        if (!confirm("Bu yayını silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
             const res = await fetch(`/api/admin/releases?id=${id}`, { method: "DELETE" });
@@ -110,9 +110,9 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-center">
-                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Discography</h3>
+                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Diskografi</h3>
                 <Button onClick={() => { setIsFormOpen(true); setEditingId(null); setFormData(emptyForm); }}>
-                    <Plus className="h-4 w-4 mr-2" /> New Release
+                    <Plus className="h-4 w-4 mr-2" /> Yeni Yayın
                 </Button>
             </div>
 
@@ -123,7 +123,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                             {/* Left Column: Basic Info */}
                             <div className="space-y-6">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Release Title</label>
+                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Yayın Başlığı</label>
                                     <input
                                         required
                                         className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none"
@@ -133,7 +133,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
-                                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Type</label>
+                                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Tür</label>
                                         <select
                                             className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none"
                                             value={formData.releaseType}
@@ -145,7 +145,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                         </select>
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Release Date</label>
+                                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Yayın Tarihi</label>
                                         <input
                                             type="date"
                                             required
@@ -156,7 +156,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Cover Image URL</label>
+                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Kapak Görseli URL</label>
                                     <div className="relative">
                                         <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                                         <input
@@ -189,7 +189,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                     </div>
                                     {formData.coverImageUrl && (
                                         <div className="mt-2 relative w-full h-32 bg-black rounded-xl overflow-hidden border border-white/10">
-                                            <img src={formData.coverImageUrl} alt="Cover preview" className="w-full h-full object-cover" />
+                                            <img src={formData.coverImageUrl} alt="Kapak önizleme" className="w-full h-full object-cover" />
                                             <button
                                                 onClick={() => setFormData(prev => ({ ...prev, coverImageUrl: "" }))}
                                                 className="absolute top-2 right-2 p-1 bg-black/50 text-white rounded-full hover:bg-red-500 transition-colors"
@@ -208,7 +208,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                         onChange={e => setFormData({ ...formData, isFeatured: e.target.checked })}
                                     />
                                     <label htmlFor="isFeatured" className="font-oswald uppercase text-sm tracking-widest cursor-pointer">
-                                        FEATURE AS LATEST RELEASE
+                                        SON YAYIN OLARAK ÖNE ÇIKAR
                                     </label>
                                 </div>
                             </div>
@@ -216,7 +216,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                             {/* Right Column: Streaming Links */}
                             <div className="space-y-6">
                                 <div className="space-y-4">
-                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Streaming URLs</label>
+                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Dijital Platform Linkleri</label>
                                     {[
                                         { label: "Spotify", key: "spotifyUrl" },
                                         { label: "Apple Music", key: "appleMusicUrl" },
@@ -235,7 +235,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                     ))}
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Description</label>
+                                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Açıklama</label>
                                     <textarea
                                         className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none min-h-[100px]"
                                         value={formData.description || ""}
@@ -246,9 +246,9 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                         </div>
 
                         <div className="flex justify-end gap-4 pt-4 border-t border-white/5">
-                            <Button variant="outline" onClick={() => setIsFormOpen(false)}>Cancel</Button>
+                            <Button variant="outline" onClick={() => setIsFormOpen(false)}>İptal</Button>
                             <Button type="submit" disabled={isLoading} className="min-w-[150px]">
-                                {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : (editingId ? "UPDATE RELEASE" : "CREATE RELEASE")}
+                                {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : (editingId ? "YAYINI GÜNCELLE" : "YAYIN OLUŞTUR")}
                             </Button>
                         </div>
                     </form>
@@ -274,7 +274,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
 
                         <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                             <p className="text-xs text-gray-500 font-oswald uppercase tracking-widest">
-                                Released {format(new Date(release.releaseDate), "MMM dd, yyyy")}
+                                Yayın Tarihi: {format(new Date(release.releaseDate), "dd MMM yyyy")}
                             </p>
 
                             <div className="flex gap-2">
@@ -288,7 +288,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                         setIsFormOpen(true);
                                     }}
                                 >
-                                    <Edit2 className="h-4 w-4 mr-2" /> Edit
+                                    <Edit2 className="h-4 w-4 mr-2" /> Düzenle
                                 </Button>
                                 <Button
                                     variant="outline"

@@ -70,18 +70,18 @@ export function VideosManager({ initialData }: VideosManagerProps) {
                 setEditingId(null);
                 setFormData(emptyForm);
             } else {
-                alert("Failed to save video. Please try again.");
+                alert("Video kaydedilemedi. Lütfen tekrar deneyin.");
             }
         } catch (error) {
             console.error(error);
-            alert("An error occurred.");
+            alert("Bir hata oluştu.");
         } finally {
             setIsLoading(false);
         }
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Delete this video?")) return;
+        if (!confirm("Bu videoyu silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
             const res = await fetch(`/api/admin/videos?id=${id}`, { method: "DELETE" });
@@ -98,9 +98,9 @@ export function VideosManager({ initialData }: VideosManagerProps) {
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-center">
-                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Video Content</h3>
+                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Video İçerikleri</h3>
                 <Button onClick={() => { setIsFormOpen(true); setEditingId(null); setFormData(emptyForm); }}>
-                    <Plus className="h-4 w-4 mr-2" /> Add Video
+                    <Plus className="h-4 w-4 mr-2" /> Video Ekle
                 </Button>
             </div>
 
@@ -109,7 +109,7 @@ export function VideosManager({ initialData }: VideosManagerProps) {
                     <form onSubmit={handleSave} className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Video Title</label>
+                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Video Başlığı</label>
                                 <input
                                     required
                                     className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none"
@@ -131,7 +131,7 @@ export function VideosManager({ initialData }: VideosManagerProps) {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Thumbnail Image URL</label>
+                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Kapak Görseli URL</label>
                                 <div className="relative">
                                     <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                                     <input
@@ -183,15 +183,15 @@ export function VideosManager({ initialData }: VideosManagerProps) {
                                     onChange={e => setFormData({ ...formData, isFeatured: e.target.checked })}
                                 />
                                 <label htmlFor="videoFeatured" className="font-oswald uppercase text-sm tracking-widest cursor-pointer">
-                                    FEATURE ON HERO SECTION
+                                    HERO BÖLÜMÜNDE ÖNE ÇIKAR
                                 </label>
                             </div>
                         </div>
 
                         <div className="flex justify-end gap-4 pt-4 border-t border-white/5">
-                            <Button variant="outline" onClick={() => setIsFormOpen(false)}>Cancel</Button>
+                            <Button variant="outline" onClick={() => setIsFormOpen(false)}>İptal</Button>
                             <Button type="submit" disabled={isLoading} className="min-w-[150px]">
-                                {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : (editingId ? "UPDATE VIDEO" : "ADD VIDEO")}
+                                {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : (editingId ? "VİDEOYU GÜNCELLE" : "VİDEO EKLE")}
                             </Button>
                         </div>
                     </form>
@@ -229,7 +229,7 @@ export function VideosManager({ initialData }: VideosManagerProps) {
                                         setIsFormOpen(true);
                                     }}
                                 >
-                                    <Edit2 className="h-4 w-4 mr-2" /> Edit
+                                    <Edit2 className="h-4 w-4 mr-2" /> Düzenle
                                 </Button>
                                 <Button
                                     variant="outline"

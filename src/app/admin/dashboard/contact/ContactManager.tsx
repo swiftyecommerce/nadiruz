@@ -49,10 +49,10 @@ export function ContactManager({ initialData }: ContactManagerProps) {
         <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
-                    <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-[#39ff14] border-b border-white/5 pb-2">Email Channels</h3>
+                    <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-[#39ff14] border-b border-white/5 pb-2">E-posta Kanalları</h3>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Management Email</label>
+                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Menajerlik E-postası</label>
                         <div className="relative">
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                             <input
@@ -66,7 +66,7 @@ export function ContactManager({ initialData }: ContactManagerProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Booking Email</label>
+                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Booking E-postası</label>
                         <div className="relative">
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                             <input
@@ -80,7 +80,7 @@ export function ContactManager({ initialData }: ContactManagerProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Press Email (Optional)</label>
+                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Basın E-postası (Opsiyonel)</label>
                         <div className="relative">
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                             <input
@@ -94,10 +94,10 @@ export function ContactManager({ initialData }: ContactManagerProps) {
                 </div>
 
                 <div className="space-y-6">
-                    <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-purple-500 border-b border-white/5 pb-2">Direct Links</h3>
+                    <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-purple-500 border-b border-white/5 pb-2">Direkt Bağlantılar</h3>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">WhatsApp Number</label>
+                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">WhatsApp Numarası</label>
                         <div className="relative">
                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                             <input
@@ -110,7 +110,7 @@ export function ContactManager({ initialData }: ContactManagerProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Instagram DM Link</label>
+                        <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Instagram DM Linki</label>
                         <div className="relative">
                             <Instagram className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                             <input
@@ -133,17 +133,17 @@ export function ContactManager({ initialData }: ContactManagerProps) {
                     {isSaving ? (
                         <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            UPDATING...
+                            GÜNCELLENİYOR...
                         </>
                     ) : (
-                        "UPDATE CONTACT INFO"
+                        "İLETİŞİM BİLGİLERİNİ GÜNCELLE"
                     )}
                 </Button>
 
                 {success && (
                     <div className="flex items-center gap-2 text-[#39ff14] font-oswald animate-in fade-in slide-in-from-left duration-500">
                         <Check className="h-5 w-5" />
-                        CONTACT INFORMATION UPDATED
+                        İLETİŞİM BİLGİLERİ GÜNCELLENDİ
                     </div>
                 )}
             </div>

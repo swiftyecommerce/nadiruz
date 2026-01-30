@@ -56,7 +56,7 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Are you sure you want to delete this link?")) return;
+        if (!confirm("Bu linki silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
             const res = await fetch(`/api/admin/socials?id=${id}`, { method: "DELETE" });
@@ -73,9 +73,9 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-center px-2">
-                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Social Inventory</h3>
+                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Sosyal Medya Envanteri</h3>
                 <Button size="sm" onClick={() => { setIsAdding(true); setFormData({ platform: "", url: "", isPrimary: false, order: links.length }); }}>
-                    <Plus className="h-4 w-4 mr-2" /> Add Link
+                    <Plus className="h-4 w-4 mr-2" /> Link Ekle
                 </Button>
             </div>
 
@@ -83,7 +83,7 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
                 {isAdding && (
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-6 bg-black rounded-2xl border border-[#39ff14]/30 animate-in fade-in zoom-in duration-300">
                         <input
-                            placeholder="Platform (e.g. Spotify)"
+                            placeholder="Platform (Örn: Spotify)"
                             className="bg-[#111111] border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#39ff14]"
                             value={formData.platform}
                             onChange={e => setFormData({ ...formData, platform: e.target.value })}
@@ -159,7 +159,7 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
                         </div>
                     ))}
                     {links.length === 0 && !isAdding && (
-                        <p className="py-12 text-center text-gray-500 italic">No social links added yet.</p>
+                        <p className="py-12 text-center text-gray-500 italic">Henüz sosyal medya linki eklenmemiş.</p>
                     )}
                 </div>
             </div>

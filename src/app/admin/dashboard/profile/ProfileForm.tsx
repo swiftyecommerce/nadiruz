@@ -142,7 +142,7 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
                 </div>
 
                 <div className="md:col-span-2 space-y-2">
-                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">About Image</label>
+                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Hakkında Görseli</label>
                     <div className="relative">
                         <input
                             type="file"
@@ -174,7 +174,7 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
                     </div>
                     {formData.profileImageUrl && (
                         <div className="mt-2 relative w-full h-64 bg-black rounded-xl overflow-hidden border border-white/10">
-                            <img src={formData.profileImageUrl} alt="Profile Preview" className="w-full h-full object-cover" />
+                            <img src={formData.profileImageUrl} alt="Profil Önizleme" className="w-full h-full object-cover" />
                             <button
                                 type="button"
                                 onClick={() => setFormData(prev => ({ ...prev, profileImageUrl: "" }))}

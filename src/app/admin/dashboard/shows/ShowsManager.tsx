@@ -76,7 +76,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
     };
 
     const handleDelete = async (id: string) => {
-        if (!confirm("Delete this show?")) return;
+        if (!confirm("Bu konseri silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
             const res = await fetch(`/api/admin/shows?id=${id}`, { method: "DELETE" });
@@ -96,9 +96,9 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-center">
-                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Scheduled Shows</h3>
+                <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Planlanmış Konserler</h3>
                 <Button onClick={() => { setIsFormOpen(true); setEditingId(null); setFormData(emptyForm); }}>
-                    <Plus className="h-4 w-4 mr-2" /> Add Show
+                    <Plus className="h-4 w-4 mr-2" /> Konser Ekle
                 </Button>
             </div>
 
@@ -107,7 +107,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                     <form onSubmit={handleSave} className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">City</label>
+                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Şehir</label>
                                 <input
                                     required
                                     className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none"
@@ -116,7 +116,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Venue</label>
+                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Mekan</label>
                                 <input
                                     required
                                     className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none"
@@ -125,7 +125,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Date & Time</label>
+                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Tarih & Saat</label>
                                 <input
                                     type="datetime-local"
                                     required
@@ -135,7 +135,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Ticket URL (Optional)</label>
+                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Bilet Linki (Opsiyonel)</label>
                                 <input
                                     className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none"
                                     value={formData.ticketUrl || ""}
@@ -143,10 +143,10 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                                 />
                             </div>
                             <div className="space-y-2 md:col-span-2">
-                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Note (Optional)</label>
+                                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Not (Opsiyonel)</label>
                                 <input
                                     className="w-full bg-[#111111] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-[#39ff14] outline-none"
-                                    placeholder="e.g. VIP packages available"
+                                    placeholder="Örn: VIP paketler mevcuttur"
                                     value={formData.note || ""}
                                     onChange={e => setFormData({ ...formData, note: e.target.value })}
                                 />
@@ -167,9 +167,9 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                         </div>
 
                         <div className="flex justify-end gap-4 pt-4 border-t border-white/5">
-                            <Button variant="outline" onClick={() => setIsFormOpen(false)}>Cancel</Button>
+                            <Button variant="outline" onClick={() => setIsFormOpen(false)}>İptal</Button>
                             <Button type="submit" disabled={isLoading} className="min-w-[150px]">
-                                {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : (editingId ? "UPDATE SHOW" : "ADD SHOW")}
+                                {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : (editingId ? "KONSERİ GÜNCELLE" : "KONSER EKLE")}
                             </Button>
                         </div>
                     </form>
@@ -178,7 +178,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
 
             <div className="space-y-12">
                 <section className="space-y-6">
-                    <h4 className="text-lg font-oswald font-bold uppercase tracking-widest text-[#39ff14]">Upcoming</h4>
+                    <h4 className="text-lg font-oswald font-bold uppercase tracking-widest text-[#39ff14]">Gelecek Program</h4>
                     <div className="space-y-4">
                         {upcomingShows.map((show) => (
                             <div key={show.id} className={`p-6 bg-black border border-white/5 rounded-2xl flex flex-wrap items-center justify-between gap-6 transition-all hover:border-white/20 ${show.isCancelled ? 'opacity-50' : ''}`}>
@@ -189,7 +189,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                                     </div>
                                     <div>
                                         <h5 className="text-xl font-oswald font-bold flex items-center gap-2">
-                                            {show.venue} {show.isCancelled && <span className="text-red-500 text-[10px] border border-red-500/30 px-2 py-0.5 rounded">CANCELLED</span>}
+                                            {show.venue} {show.isCancelled && <span className="text-red-500 text-[10px] border border-red-500/30 px-2 py-0.5 rounded">İPTAL EDİLDİ</span>}
                                         </h5>
                                         <div className="flex items-center gap-4 text-sm text-gray-500 font-medium">
                                             <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {show.city}</span>
@@ -213,13 +213,13 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                                 </div>
                             </div>
                         ))}
-                        {upcomingShows.length === 0 && <p className="text-gray-600 italic text-center p-8 bg-white/5 rounded-2xl border border-dashed border-white/10">No upcoming shows.</p>}
+                        {upcomingShows.length === 0 && <p className="text-gray-600 italic text-center p-8 bg-white/5 rounded-2xl border border-dashed border-white/10">Yakın zamanda planlanmış konser bulunmamaktadır.</p>}
                     </div>
                 </section>
 
                 {pastShows.length > 0 && (
                     <section className="space-y-6 opacity-60">
-                        <h4 className="text-lg font-oswald font-bold uppercase tracking-widest text-gray-500">Past Gigs</h4>
+                        <h4 className="text-lg font-oswald font-bold uppercase tracking-widest text-gray-500">Geçmiş Konserler</h4>
                         <div className="space-y-2">
                             {pastShows.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map(show => (
                                 <div key={show.id} className="p-4 bg-white/5 rounded-xl flex items-center justify-between text-sm">
