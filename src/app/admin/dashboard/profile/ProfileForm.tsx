@@ -19,6 +19,8 @@ interface ProfileFormProps {
         profileImageUrl: string | null;
         heroButtonText?: string | null;
         heroButtonUrl?: string | null;
+        aboutTitle?: string | null;
+        aboutHighlight?: string | null;
     };
 }
 
@@ -125,8 +127,31 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
                 />
             </div>
 
+            <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Hakkında Bölümü Başlığı</label>
+                    <input
+                        type="text"
+                        value={formData.aboutTitle || ""}
+                        onChange={(e) => setFormData({ ...formData, aboutTitle: e.target.value })}
+                        placeholder="Örn: Sesteki Vizyon"
+                        className="w-full bg-black border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-[#39ff14]/50 transition-all font-medium"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Hakkında Başlık Vurgusu (Renkli Kısım)</label>
+                    <input
+                        type="text"
+                        value={formData.aboutHighlight || ""}
+                        onChange={(e) => setFormData({ ...formData, aboutHighlight: e.target.value })}
+                        placeholder="Örn: Vizyon"
+                        className="w-full bg-black border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-[#39ff14]/50 transition-all font-medium"
+                    />
+                </div>
+            </div>
+
             <div className="space-y-2">
-                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Uzun Biyografi (Hakkında Bölümü)</label>
+                <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Sesteki Vizyon (Hakkında Bölümü İçeriği)</label>
                 <textarea
                     value={formData.longBio}
                     onChange={(e) => setFormData({ ...formData, longBio: e.target.value })}

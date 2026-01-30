@@ -43,6 +43,8 @@ async function getData() {
       profileImageUrl: "https://images.unsplash.com/photo-1571266028243-e4733b0f0bb1?auto=format&fit=crop&q=80&w=1000",
       heroButtonText: "Spotify'da Dinle",
       heroButtonUrl: "#",
+      aboutTitle: "Sesteki Vizyon",
+      aboutHighlight: "Vizyon",
     },
     socialLinks: socialLinks || [],
     featuredRelease: featuredRelease || null,

@@ -5,6 +5,8 @@ interface AboutProps {
         genre?: string | null;
         activeSince?: string | null;
         profileImageUrl?: string | null;
+        aboutTitle?: string | null;
+        aboutHighlight?: string | null;
     };
 }
 
@@ -15,7 +17,14 @@ export function About({ profile }: AboutProps) {
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
                     <div className="space-y-8 animate-in fade-in slide-in-from-left duration-1000">
                         <h2 className="text-5xl font-oswald font-bold leading-none">
-                            Sesteki <span className="text-[#39ff14]">Vizyon</span>
+                            {profile.aboutTitle ? (
+                                <>
+                                    {profile.aboutTitle.replace(profile.aboutHighlight || "", "")}
+                                    <span className="text-[#39ff14]">{profile.aboutHighlight}</span>
+                                </>
+                            ) : (
+                                <>Sesteki <span className="text-[#39ff14]">Vizyon</span></>
+                            )}
                         </h2>
 
                         <div className="space-y-6 text-xl text-gray-400 leading-relaxed font-light">

@@ -8,14 +8,18 @@ datasource db {
 }
 
 model ArtistProfile {
-  id            String  @id @default(cuid())
-  stageName     String  @default("Nadir UZ")
-  realName      String?
-  shortBio      String
-  longBio       String
-  heroTagline   String
-  heroHighlight String
-  location      String?
+  id             String  @id @default(cuid())
+  stageName      String  @default("Nadir UZ")
+  realName       String?
+  shortBio       String
+  longBio        String
+  heroTagline    String
+  heroHighlight  String
+  aboutTitle     String? @default("Sesteki Vizyon")
+  aboutHighlight String? @default("Vizyon")
+  location       String?
+  heroButtonText String? @default("Spotify'da Dinle")
+  heroButtonUrl  String? @default("#")
 }
 
 model SocialLink {

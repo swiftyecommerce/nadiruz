@@ -26,10 +26,11 @@
     },
     {
       "id": "mvwcq7j",
-      "platform": "Tiktok",
+      "platform": "TikTok",
       "url": "https://www.tiktok.com/@uz.nadir",
       "isPrimary": false,
-      "order": 1
+      "order": 1,
+      "iconType": "TikTok"
     }
   ],
   "Release": [
