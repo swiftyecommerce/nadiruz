@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ArtistProfile {
+  id            String  @id @default(cuid())
+  stageName     String  @default("Nadir UZ")
+  realName      String?
+  shortBio      String
+  longBio       String
+  heroTagline   String
+  heroHighlight String
+  location      String?
+}
+
+model SocialLink {
+  id        String  @id @default(cuid())
+  platform  String
+  url       String
+  isPrimary Boolean @default(false)
+  order     Int
+}
+
+model Release {
+  id              String   @id @default(cuid())
+  title           String
+  releaseType     String // "Single", "EP", "Album"
+  coverImageUrl   String
+  description     String?
+  releaseDate     DateTime
+  spotifyUrl      String?
+  appleMusicUrl   String?
+  youtubeMusicUrl String?
+  deezerUrl       String?
+  isFeatured      Boolean  @default(false)
+}
+
+model Video {
+  id           String  @id @default(cuid())
+  title        String
+  youtubeUrl   String
+  thumbnailUrl String
+  isFeatured   Boolean @default(false)
+}
+
+model Show {
+  id          String   @id @default(cuid())
+  city        String
+  venue       String
+  date        DateTime
+  ticketUrl   String?
+  note        String?
+  isCancelled Boolean  @default(false)
+}
+
+model ContactInfo {
+  id              String  @id @default(cuid())
+  managementEmail String
+  bookingEmail    String
+  pressEmail      String?
+  whatsappNumber  String?
+  instagramDmLink String?
+}

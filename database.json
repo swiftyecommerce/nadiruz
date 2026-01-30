@@ -1,0 +1,52 @@
+{
+  "ArtistProfile": [
+    {
+      "id": "default",
+      "stageName": "Nadir UZ",
+      "realName": "",
+      "heroTagline": "RAP SANATÇISI / HİKAYE ANLATICI",
+      "heroHighlight": "YENİ ŞARKI",
+      "shortBio": "Sinematik hikaye anlatımı ve sert dizeleriyle tanınan bağımsız Türk rap sanatçısı.",
+      "longBio": "NDALSNKDLNAMAÇÖNSANDMAÖSND",
+      "location": "İSTANBUL",
+      "genre": "Test Genre",
+      "activeSince": "2020",
+      "profileImageUrl": "/test/image.jpg"
+    }
+  ],
+  "SocialLink": [
+    {
+      "id": "z4rh9",
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/nadir.uz",
+      "isPrimary": false,
+      "order": 0
+    },
+    {
+      "id": "mvwcq7j",
+      "platform": "Tiktok",
+      "url": "https://www.tiktok.com/@uz.nadir",
+      "isPrimary": false,
+      "order": 1
+    }
+  ],
+  "Release": [],
+  "Video": [
+    {
+      "id": "wgilbc",
+      "title": "V1",
+      "isFeatured": false,
+      "youtubeUrl": "https://www.youtube.com/watch?v=6DDkEoiwDVU&list=RD6DDkEoiwDVU&start_radio=1&pp=ygUIbmFkaXIgdXqgBwE%3D",
+      "thumbnailUrl": "/uploads/1769759067836-106469026-GeminiGeneratedImagepa8hvpa8hvpa8hvp.png"
+    },
+    {
+      "id": "c7x9d7",
+      "title": "V2",
+      "isFeatured": true,
+      "youtubeUrl": "https://www.youtube.com/watch?v=8X8H85u-en0",
+      "thumbnailUrl": "/uploads/1769759117130-77575765-GeminiGeneratedImagecikaswcikaswcika.png"
+    }
+  ],
+  "Show": [],
+  "ContactInfo": []
+}
