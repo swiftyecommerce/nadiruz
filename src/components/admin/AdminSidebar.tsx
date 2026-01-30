@@ -38,10 +38,10 @@ export function AdminSidebar() {
     return (
         <div className="w-64 bg-[#111111] border-r border-white/5 flex flex-col min-h-screen">
             <div className="p-8">
-                <h1 className="text-2xl font-oswald font-bold tracking-tighter text-white">
+                <h1 className="text-2xl font-oswald font-bold tracking-tighter text-white normal-case">
                     Swifty<span className="text-[#39ff14]">.</span>MP
                 </h1>
-                <p className="text-gray-500 text-[11px] font-medium tracking-[0.1em] mt-1">
+                <p className="text-gray-500 text-[11px] font-medium tracking-[0.1em] mt-1 normal-case">
                     Sanatçı Yönetim Paneli
                 </p>
             </div>
