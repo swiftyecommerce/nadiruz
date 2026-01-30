@@ -38,11 +38,11 @@ export function AdminSidebar() {
     return (
         <div className="w-64 bg-[#111111] border-r border-white/5 flex flex-col min-h-screen">
             <div className="p-8">
-                <h1 className="text-2xl font-oswald font-bold tracking-widest text-[#39ff14]">
-                    Swifty.Music
+                <h1 className="text-2xl font-bold tracking-tighter text-white">
+                    Swifty<span className="text-[#39ff14]">.</span>MP
                 </h1>
-                <p className="text-gray-500 text-[10px] uppercase tracking-widest mt-1">
-                    Yönetim Paneli
+                <p className="text-gray-500 text-[10px] font-medium uppercase tracking-[0.2em] mt-1">
+                    Sanatçı Yönetim Paneli
                 </p>
             </div>
 
