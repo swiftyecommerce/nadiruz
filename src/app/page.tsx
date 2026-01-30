@@ -41,6 +41,8 @@ async function getData() {
       genre: "Hip-Hop",
       activeSince: "2018",
       profileImageUrl: "https://images.unsplash.com/photo-1571266028243-e4733b0f0bb1?auto=format&fit=crop&q=80&w=1000",
+      heroButtonText: "Spotify'da Dinle",
+      heroButtonUrl: "#",
     },
     socialLinks: socialLinks || [],
     featuredRelease: featuredRelease || null,

@@ -11,6 +11,8 @@ interface HeroProps {
         heroTagline: string;
         shortBio: string;
         heroHighlight: string;
+        heroButtonText?: string | null;
+        heroButtonUrl?: string | null;
     };
     featuredVideo: {
         youtubeUrl: string;
@@ -53,10 +55,12 @@ export function Hero({ profile, featuredVideo }: HeroProps) {
                     </p>
 
                     <div className="flex flex-wrap gap-4">
-                        <Button size="lg" className="group">
-                            <Music className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-                            Spotify'da Dinle
-                        </Button>
+                        {profile.heroButtonUrl && (
+                            <Button size="lg" className="group" onClick={() => window.open(profile.heroButtonUrl!, "_blank")}>
+                                <Music className="mr-2 h-5 w-5 group-hover:animate-pulse" />
+                                {profile.heroButtonText || "Dinle"}
+                            </Button>
+                        )}
                         <Button variant="outline" size="lg" onClick={() => setIsVideoOpen(true)}>
                             Son Videoyu İzle
                         </Button>

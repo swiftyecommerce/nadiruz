@@ -59,10 +59,10 @@ export function LatestRelease({ release }: ReleaseProps) {
                                     YAYIN TARİHİ {format(release.releaseDate, "dd MMM, yyyy")}
                                 </span>
                             </div>
-                            <h3 className="text-6xl md:text-8xl font-oswald font-bold tracking-tight">
+                            <h3 className="text-4xl md:text-6xl font-oswald font-bold tracking-tight">
                                 {release.title}
                             </h3>
-                            <p className="text-xl text-gray-400 max-w-xl">
+                            <p className="text-lg text-gray-400 max-w-xl whitespace-pre-line">
                                 {release.description}
                             </p>
                         </div>
