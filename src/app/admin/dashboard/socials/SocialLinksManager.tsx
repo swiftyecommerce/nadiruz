@@ -247,5 +247,3 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
         </div>
     );
 }
-    );
-}
