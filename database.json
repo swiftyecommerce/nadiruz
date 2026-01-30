@@ -11,7 +11,9 @@
       "location": "İSTANBUL",
       "genre": "Test Genre",
       "activeSince": "2000-2026",
-      "profileImageUrl": "/uploads/1769808615802-966860022-nadiruz.png"
+      "profileImageUrl": "/uploads/1769808615802-966860022-nadiruz.png",
+      "heroButtonText": "Spotify'da Dinle",
+      "heroButtonUrl": "https://open.spotify.com/intl-tr/artist/0tUjt4DgvwsbopH2nqO6eF"
     }
   ],
   "SocialLink": [

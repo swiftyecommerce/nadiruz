@@ -1,11 +1,28 @@
 "use client";
 
-import { Music, ExternalLink, Instagram, Youtube, Twitter, MessageSquare, Disc, Globe } from "lucide-react";
+import {
+    Music,
+    ExternalLink,
+    Instagram,
+    Youtube,
+    Twitter,
+    MessageSquare,
+    Disc,
+    Globe,
+    Mic2,
+    Music2,
+    Cloud,
+    Facebook,
+    Play,
+    Radio,
+    Share2
+} from "lucide-react";
 
 interface SocialLink {
     id: string;
     platform: string;
     url: string;
+    iconType?: string | null;
 }
 
 interface MusicPlatformsProps {
@@ -16,7 +33,23 @@ const platformIcons: Record<string, any> = {
     Spotify: Music,
     YouTube: Youtube,
     Instagram: Instagram,
+    TikTok: Music2,
     "Apple Music": Disc,
+    Deezer: Mic2,
+    SoundCloud: Cloud,
+    Twitter: Twitter,
+    Facebook: Facebook,
+    X: Twitter,
+    // Icon Picker fallbacks
+    Globe: Globe,
+    Music: Music,
+    YoutubeIcon: Youtube,
+    InstagramIcon: Instagram,
+    Radio: Radio,
+    Play: Play,
+    Mic: Mic2,
+    Disc: Disc,
+    Share: Share2,
     Default: Globe,
 };
 
@@ -30,7 +63,7 @@ export function MusicPlatforms({ links }: MusicPlatformsProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {links.map((link) => {
-                        const Icon = platformIcons[link.platform] || platformIcons.Default;
+                        const Icon = platformIcons[link.iconType || ""] || platformIcons[link.platform] || platformIcons.Default;
                         return (
                             <a
                                 key={link.id}
