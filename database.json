@@ -30,23 +30,39 @@
       "order": 1
     }
   ],
-  "Release": [],
+  "Release": [
+    {
+      "id": "hti5gc",
+      "title": "Nadir Uz - Karaağaç Yayında",
+      "releaseType": "Single",
+      "coverImageUrl": "/uploads/1769808837334-334565162-karaagac.png",
+      "description": "NADİR UZ – KARAAĞAÇ\nSöz : Nadir UZ\nBeat, Mix, Mastering : Arcey\nKayıt: UZ KAPANI\n\nGerçek aşkı vatan olan, Türk yurdunun her karışını canı pahasına koruyan asil Türk evlatlarına bir nebze olsun iyi hissettirebilirsem, bunu kendime övünç sayarım.",
+      "releaseDate": "2026-01-30T00:00:00.000Z",
+      "spotifyUrl": "open.spotify.com/intl-tr/track/5hgbQPqGQSTnHfOZTvSvJW?si=zrqrMbHET2OAiSGgXx5DfA&context=spotify%3Aplaylist%3A37i9dQZEVXbe8CsGinkRFo&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnqG-XmlzolFFzb-1-krN-14AzPyoSTT9dIYQjRdCjeOCMFTgLtoQyVsxWTmU_aem_SmJ2pRSofG87WUINy9fyIg",
+      "appleMusicUrl": "https://music.apple.com/tr/album/karaağaç/1871237896?i=1871237897&l=tr",
+      "youtubeMusicUrl": "music.youtube.com/watch?v=2eIW5LvlP9g&si=b2udgiJ53Fmb4OFh&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn4gaKGuu5aSj7CgD3HqCkicGwit-ArzuWhmW8cAI7H1-wUOOkQfRWaGUUDSs_aem_uFGQIENQ1nPJPMN2ckOzhQ",
+      "deezerUrl": "",
+      "isFeatured": true
+    }
+  ],
   "Video": [
     {
       "id": "wgilbc",
-      "title": "V1",
-      "isFeatured": false,
-      "youtubeUrl": "https://www.youtube.com/watch?v=6DDkEoiwDVU&list=RD6DDkEoiwDVU&start_radio=1&pp=ygUIbmFkaXIgdXqgBwE%3D",
-      "thumbnailUrl": "/uploads/1769759067836-106469026-GeminiGeneratedImagepa8hvpa8hvpa8hvp.png"
-    },
-    {
-      "id": "c7x9d7",
-      "title": "V2",
+      "title": "Karaağaç",
       "isFeatured": true,
-      "youtubeUrl": "https://www.youtube.com/watch?v=8X8H85u-en0",
-      "thumbnailUrl": "/uploads/1769759117130-77575765-GeminiGeneratedImagecikaswcikaswcika.png"
+      "youtubeUrl": "https://www.youtube.com/watch?v=6DDkEoiwDVU&list=RD6DDkEoiwDVU&start_radio=1&pp=ygUIbmFkaXIgdXqgBwE%3D",
+      "thumbnailUrl": "/uploads/1769808804036-248148371-karaagac.png"
     }
   ],
   "Show": [],
-  "ContactInfo": []
+  "ContactInfo": [
+    {
+      "id": "default_contact",
+      "managementEmail": "mgmt@nadiruz.net",
+      "bookingEmail": "booking@nadiruz.net",
+      "pressEmail": "",
+      "whatsappNumber": "5555555555",
+      "instagramDmLink": ""
+    }
+  ]
 }

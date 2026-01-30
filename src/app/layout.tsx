@@ -4,12 +4,12 @@ import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 const oswald = Oswald({
   variable: "--font-oswald",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="tr" className="dark scroll-smooth">
       <body
         className={`${inter.variable} ${oswald.variable} antialiased bg-[#0a0a0a] text-white selection:bg-[#39ff14] selection:text-black`}
       >
