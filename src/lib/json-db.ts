@@ -34,14 +34,40 @@ function writeDb(data: any) {
     fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
 }
 
+// Helper for filtering
+const applyFilters = (data: any[], where: any) => {
+    if (!where) return data;
+    return data.filter((item: any) => {
+        return Object.keys(where).every(key => {
+            const filter = where[key];
+            const val = item[key];
+
+            // Handle date objects or date strings
+            const compareVal = (v: any) => (v instanceof Date ? v.getTime() : new Date(v).getTime());
+
+            if (typeof filter === 'object' && filter !== null) {
+                if ('gte' in filter) return compareVal(val) >= compareVal(filter.gte);
+                if ('lte' in filter) return compareVal(val) <= compareVal(filter.lte);
+                if ('gt' in filter) return compareVal(val) > compareVal(filter.gt);
+                if ('lt' in filter) return compareVal(val) < compareVal(filter.lt);
+            }
+            return val === filter;
+        });
+    });
+};
+
 // Generic CRUD Factory
 const createModel = (modelName: string) => {
     return {
         findMany: async (args?: any) => {
             const db = readDb();
             let data = db[modelName] || [];
+
+            if (args?.where) {
+                data = applyFilters(data, args.where);
+            }
+
             if (args?.orderBy) {
-                // Simple sort support
                 const key = Object.keys(args.orderBy)[0];
                 const direction = args.orderBy[key];
                 data.sort((a: any, b: any) => {
@@ -49,21 +75,15 @@ const createModel = (modelName: string) => {
                     return a[key] < b[key] ? 1 : -1;
                 });
             }
-            if (args?.where) {
-                // Simple filtering
-                data = data.filter((item: any) => {
-                    return Object.keys(args.where).every(key => item[key] === args.where[key]);
-                });
-            }
+
             return data;
         },
         findFirst: async (args?: any) => {
             const db = readDb();
             let data = db[modelName] || [];
             if (args?.where) {
-                return data.find((item: any) => {
-                    return Object.keys(args.where).every(key => item[key] === args.where[key]);
-                }) || null;
+                data = applyFilters(data, args.where);
+                return data[0] || null;
             }
             return data[0] || null;
         },
@@ -105,9 +125,13 @@ const createModel = (modelName: string) => {
             writeDb(db);
             return { id: where.id }; // Return deleted dummy
         },
-        count: async () => {
+        count: async (args?: any) => {
             const db = readDb();
-            return (db[modelName] || []).length;
+            let data = db[modelName] || [];
+            if (args?.where) {
+                data = applyFilters(data, args.where);
+            }
+            return data.length;
         },
         upsert: async ({ where, update, create }: any) => {
             const db = readDb();
