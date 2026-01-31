@@ -134,7 +134,7 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
 
             <div className="space-y-4">
                 {(isAdding || isEditing) && (
-                    <div className="p-6 bg-[#0a0a0a] rounded-2xl border border-[#39ff14]/30 animate-in fade-in zoom-in duration-300 space-y-6">
+                    <div className="p-4 md:p-6 bg-[#0a0a0a] rounded-2xl border border-[#39ff14]/30 animate-in fade-in zoom-in duration-300 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-oswald uppercase text-gray-500 tracking-widest ml-1">Platform Seç</label>
@@ -206,17 +206,17 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
 
                 <div className="divide-y divide-white/5">
                     {links.filter(link => link && link.id).sort((a, b) => (a.order || 0) - (b.order || 0)).map((link) => (
-                        <div key={link.id} className="group py-4 flex items-center justify-between gap-4 px-4 hover:bg-white/5 rounded-xl transition-colors">
-                            <div className="flex items-center gap-6">
-                                <GripVertical className="h-5 w-5 text-gray-700 cursor-grab" />
-                                <div>
-                                    <h4 className="font-oswald font-bold text-lg text-white group-hover:text-[#39ff14] transition-colors">
+                        <div key={link.id} className="group py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2 md:px-4 hover:bg-white/5 rounded-xl transition-colors">
+                            <div className="flex items-center gap-4 flex-1 min-w-0">
+                                <GripVertical className="h-5 w-5 text-gray-700 cursor-grab flex-shrink-0" />
+                                <div className="min-w-0 flex-1">
+                                    <h4 className="font-oswald font-bold text-lg text-white group-hover:text-[#39ff14] transition-colors truncate">
                                         {link.platform}
                                     </h4>
-                                    <p className="text-xs text-gray-500 font-medium truncate max-w-[200px] md:max-w-md">{link.url}</p>
+                                    <p className="text-xs text-gray-500 font-medium truncate block">{link.url}</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 justify-end">
                                 <button
                                     className="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-all"
                                     onClick={() => {

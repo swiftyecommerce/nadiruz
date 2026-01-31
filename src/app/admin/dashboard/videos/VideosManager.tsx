@@ -105,7 +105,7 @@ export function VideosManager({ initialData }: VideosManagerProps) {
             </div>
 
             {isFormOpen && (
-                <div className="bg-black border border-[#39ff14]/30 p-8 rounded-3xl animate-in fade-in zoom-in duration-300">
+                <div className="bg-black border border-[#39ff14]/30 p-4 md:p-8 rounded-3xl animate-in fade-in zoom-in duration-300">
                     <form onSubmit={handleSave} className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">

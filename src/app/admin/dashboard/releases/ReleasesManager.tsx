@@ -117,7 +117,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
             </div>
 
             {isFormOpen && (
-                <div className="bg-black border border-[#39ff14]/30 p-8 rounded-3xl animate-in fade-in zoom-in duration-300">
+                <div className="bg-black border border-[#39ff14]/30 p-4 md:p-8 rounded-3xl animate-in fade-in zoom-in duration-300">
                     <form onSubmit={handleSave} className="space-y-8">
                         <div className="grid md:grid-cols-2 gap-8">
                             {/* Left Column: Basic Info */}
@@ -131,7 +131,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                                         onChange={e => setFormData({ ...formData, title: e.target.value })}
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <label className="text-xs font-oswald uppercase text-gray-400 tracking-widest ml-1">Tür</label>
                                         <select
