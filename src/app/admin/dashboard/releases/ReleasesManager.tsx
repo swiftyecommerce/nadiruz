@@ -109,9 +109,9 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
 
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                 <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Diskografi</h3>
-                <Button onClick={() => { setIsFormOpen(true); setEditingId(null); setFormData(emptyForm); }}>
+                <Button className="w-full md:w-auto" onClick={() => { setIsFormOpen(true); setEditingId(null); setFormData(emptyForm); }}>
                     <Plus className="h-4 w-4 mr-2" /> Yeni Yayın
                 </Button>
             </div>
@@ -245,9 +245,9 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                             </div>
                         </div>
 
-                        <div className="flex justify-end gap-4 pt-4 border-t border-white/5">
-                            <Button variant="outline" onClick={() => setIsFormOpen(false)}>İptal</Button>
-                            <Button type="submit" disabled={isLoading} className="min-w-[150px]">
+                        <div className="flex flex-col-reverse md:flex-row justify-end gap-4 pt-4 border-t border-white/5">
+                            <Button variant="outline" className="w-full md:w-auto" onClick={() => setIsFormOpen(false)}>İptal</Button>
+                            <Button type="submit" disabled={isLoading} className="w-full md:w-auto min-w-[150px]">
                                 {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : (editingId ? "YAYINI GÜNCELLE" : "YAYIN OLUŞTUR")}
                             </Button>
                         </div>

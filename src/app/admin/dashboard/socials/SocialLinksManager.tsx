@@ -125,9 +125,9 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
 
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center px-2">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 px-2">
                 <h3 className="text-xl font-oswald font-bold uppercase tracking-widest text-gray-400">Sosyal Medya Envanteri</h3>
-                <Button size="sm" onClick={() => { setIsAdding(true); setFormData({ platform: "", url: "", iconType: "", isPrimary: false, order: links.length }); setShowCustomFields(false); }}>
+                <Button size="sm" className="w-full md:w-auto" onClick={() => { setIsAdding(true); setFormData({ platform: "", url: "", iconType: "", isPrimary: false, order: links.length }); setShowCustomFields(false); }}>
                     <Plus className="h-4 w-4 mr-2" /> Link Ekle
                 </Button>
             </div>
@@ -192,11 +192,11 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
                             )}
                         </div>
 
-                        <div className="flex justify-end gap-3 pt-4 border-t border-white/5">
-                            <Button variant="outline" size="sm" onClick={() => { setIsAdding(false); setIsEditing(null); }}>
+                        <div className="flex flex-col-reverse md:flex-row justify-end gap-3 pt-4 border-t border-white/5">
+                            <Button variant="outline" size="sm" className="w-full md:w-auto" onClick={() => { setIsAdding(false); setIsEditing(null); }}>
                                 İptal
                             </Button>
-                            <Button size="sm" onClick={() => handleSave(isEditing || undefined)} disabled={isLoading || !formData.platform || !formData.url}>
+                            <Button size="sm" className="w-full md:w-auto" onClick={() => handleSave(isEditing || undefined)} disabled={isLoading || !formData.platform || !formData.url}>
                                 {isLoading ? <Loader2 className="animate-spin h-4 w-4" /> : <Check className="h-4 w-4 mr-2" />}
                                 {isEditing ? "Güncelle" : "Kaydet"}
                             </Button>
