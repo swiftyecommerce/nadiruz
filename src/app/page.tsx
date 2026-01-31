@@ -7,6 +7,7 @@ import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { Navbar } from "@/components/Navbar";
+import { Discography } from "@/components/sections/Discography";
 
 import prisma from "@/lib/prisma";
 
@@ -20,7 +21,8 @@ async function getData() {
     featuredVideo,
     videos,
     shows,
-    contact
+    contact,
+    otherReleases
   ] = await Promise.all([
     prisma.artistProfile.findFirst(),
     prisma.socialLink.findMany({ orderBy: { order: "asc" } }),
@@ -28,7 +30,11 @@ async function getData() {
     prisma.video.findFirst({ where: { isFeatured: true } }),
     prisma.video.findMany(),
     prisma.show.findMany({ where: { date: { gte: new Date() } }, orderBy: { date: "asc" } }),
-    prisma.contactInfo.findFirst()
+    prisma.contactInfo.findFirst(),
+    prisma.release.findMany({
+      where: { isFeatured: false },
+      orderBy: { releaseDate: "desc" }
+    })
   ]);
 
   return {
@@ -59,6 +65,7 @@ async function getData() {
       whatsappNumber: "",
       instagramDmLink: ""
     },
+    otherReleases: otherReleases || []
   };
 }
 
@@ -72,6 +79,7 @@ export default async function Home() {
 
       <div id="music">
         <LatestRelease release={data.featuredRelease} />
+        <Discography releases={data.otherReleases} />
         <MusicPlatforms links={data.socialLinks} />
       </div>
 

@@ -46,6 +46,19 @@
       "youtubeMusicUrl": "music.youtube.com/watch?v=2eIW5LvlP9g&si=b2udgiJ53Fmb4OFh&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn4gaKGuu5aSj7CgD3HqCkicGwit-ArzuWhmW8cAI7H1-wUOOkQfRWaGUUDSs_aem_uFGQIENQ1nPJPMN2ckOzhQ",
       "deezerUrl": "",
       "isFeatured": true
+    },
+    {
+      "id": "wzuxah",
+      "title": "Mihmandar",
+      "releaseType": "Single",
+      "coverImageUrl": "/uploads/1769819251711-922447415-mihmandar.png",
+      "description": "",
+      "releaseDate": "2025-06-15T00:00:00.000Z",
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeMusicUrl": "https://www.youtube.com/watch?v=YnDYH8Syuw8",
+      "deezerUrl": "",
+      "isFeatured": false
     }
   ],
   "Video": [
@@ -55,6 +68,13 @@
       "isFeatured": true,
       "youtubeUrl": "https://www.youtube.com/watch?v=6DDkEoiwDVU&list=RD6DDkEoiwDVU&start_radio=1&pp=ygUIbmFkaXIgdXqgBwE%3D",
       "thumbnailUrl": "/uploads/1769808804036-248148371-karaagac.png"
+    },
+    {
+      "id": "rj7m7xw",
+      "title": "Karavana",
+      "youtubeUrl": "https://www.youtube.com/watch?v=8X8H85u-en0",
+      "thumbnailUrl": "/uploads/1769819319631-707214828-karavana.png",
+      "isFeatured": false
     }
   ],
   "Show": [],
