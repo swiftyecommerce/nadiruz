@@ -1,50 +1,113 @@
-// import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import fs from "fs";
+import path from "path";
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 async function main() {
-    console.log("Seed skipped due to local environment setup. The application uses fallback mock data.");
-    /*
-    // Artist Profile
-    await prisma.artistProfile.upsert({
-      where: { id: "default_profile" },
-      update: {},
-      create: {
-        id: "default_profile",
-        stageName: "Nadir UZ",
-        realName: "Nadir Uzun",
-        shortBio: "Independent Turkish rapper known for cinematic storytelling and hard-hitting lines.",
-        longBio: "Nadir UZ is a Turkish rapper who has been making waves in the independent scene. With a focus on authentic storytelling and unique soundscapes, he continues to push the boundaries of Turkish Hip-Hop. From the streets to the stage, Nadir UZ brings a raw energy that resonates with his growing audience.",
-        heroTagline: "RAP ARTIST / STORYTELLER",
-        heroHighlight: "New single 'GÖLGE' out now",
-        location: "Istanbul, Turkey",
-      },
-    });
-  
-    // Social Links
-    const socialLinks = [
-      { platform: "Spotify", url: "https://spotify.com", isPrimary: true, order: 1 },
-      { platform: "YouTube", url: "https://youtube.com", isPrimary: true, order: 2 },
-      { platform: "Instagram", url: "https://instagram.com", isPrimary: true, order: 3 },
-      { platform: "TikTok", url: "https://tiktok.com", isPrimary: false, order: 4 },
-      { platform: "Apple Music", url: "https://apple.com", isPrimary: false, order: 5 },
-    ];
-  
-    for (const link of socialLinks) {
-      await prisma.socialLink.create({ data: link });
+  const dbPath = path.join(process.cwd(), "database.json");
+  if (!fs.existsSync(dbPath)) {
+    console.error("database.json not found at", dbPath);
+    return;
+  }
+
+  const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+
+  // 1. ArtistProfile
+  if (data.ArtistProfile) {
+    for (const item of data.ArtistProfile) {
+      await prisma.artistProfile.upsert({
+        where: { id: item.id },
+        update: item,
+        create: item,
+      });
     }
-  
-    // ... rest of the seed code
-    */
+    console.log(`Seeded ${data.ArtistProfile.length} ArtistProfiles`);
+  }
+
+  // 2. SocialLink
+  if (data.SocialLink) {
+    for (const item of data.SocialLink) {
+      // id might be missing or generated in json-db. reliable match is difficult.
+      // We will try to upsert by ID if it exists, otherwise create.
+      // Ideally we should truncate or deleteMany to avoid duplicates if ID logic is fuzzy.
+      // For safety in this migration, let's delete all and recreate, OR upsert by unique ID if available.
+      // Since sqlite/json-db IDs are random strings, we can use them.
+      await prisma.socialLink.upsert({
+        where: { id: item.id },
+        update: item,
+        create: item
+      });
+    }
+    console.log(`Seeded ${data.SocialLink.length} SocialLinks`);
+  }
+
+  // 3. Release
+  if (data.Release) {
+    for (const item of data.Release) {
+      await prisma.release.upsert({
+        where: { id: item.id },
+        update: {
+          ...item,
+          releaseDate: new Date(item.releaseDate) // ensure Date conversion
+        },
+        create: {
+          ...item,
+          releaseDate: new Date(item.releaseDate)
+        }
+      });
+    }
+    console.log(`Seeded ${data.Release.length} Releases`);
+  }
+
+  // 4. Video
+  if (data.Video) {
+    for (const item of data.Video) {
+      await prisma.video.upsert({
+        where: { id: item.id },
+        update: item,
+        create: item
+      });
+    }
+    console.log(`Seeded ${data.Video.length} Videos`);
+  }
+
+  // 5. Show
+  if (data.Show) {
+    for (const item of data.Show) {
+      await prisma.show.upsert({
+        where: { id: item.id },
+        update: {
+          ...item,
+          date: new Date(item.date)
+        },
+        create: {
+          ...item,
+          date: new Date(item.date)
+        }
+      });
+    }
+    console.log(`Seeded ${data.Show.length} Shows`);
+  }
+
+  // 6. ContactInfo
+  if (data.ContactInfo) {
+    for (const item of data.ContactInfo) {
+      await prisma.contactInfo.upsert({
+        where: { id: item.id },
+        update: item,
+        create: item
+      });
+    }
+    console.log(`Seeded ${data.ContactInfo.length} ContactInfo`);
+  }
 }
 
 main()
-    .catch((e) => {
-        console.error(e);
-        process.exit(1);
-    });
-/*
-.finally(async () => {
-  await prisma.$disconnect();
-});
-*/
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

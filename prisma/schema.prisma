@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -11,15 +11,18 @@ model ArtistProfile {
   id             String  @id @default(cuid())
   stageName      String  @default("Nadir UZ")
   realName       String?
-  shortBio       String
-  longBio        String
-  heroTagline    String
-  heroHighlight  String
+  shortBio       String  @db.Text
+  longBio        String  @db.Text
+  heroTagline    String?
+  heroHighlight  String?
   aboutTitle     String? @default("Sesteki Vizyon")
   aboutHighlight String? @default("Vizyon")
   location       String?
   heroButtonText String? @default("Spotify'da Dinle")
   heroButtonUrl  String? @default("#")
+  genre          String?
+  activeSince    String?
+  profileImageUrl String?
 }
 
 model SocialLink {
@@ -36,7 +39,7 @@ model Release {
   title           String
   releaseType     String // "Single", "EP", "Album"
   coverImageUrl   String
-  description     String?
+  description     String?  @db.Text
   releaseDate     DateTime
   spotifyUrl      String?
   appleMusicUrl   String?
@@ -59,7 +62,7 @@ model Show {
   venue       String
   date        DateTime
   ticketUrl   String?
-  note        String?
+  note        String?  @db.Text
   isCancelled Boolean  @default(false)
 }
 

@@ -1,12 +1,18 @@
-import prismaJson from './json-db';
+import { PrismaClient } from "@prisma/client";
 
-/**
- * Prisma Client Adapter using JSON File Fallback
- * 
- * Since the native Prisma Client cannot be generated in this environment,
- * we are using a custom JSON-file based adapter that mimics the Prisma API.
- */
+const prismaClientSingleton = () => {
+    return new PrismaClient();
+};
 
-const prisma = prismaJson;
+type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+
+const globalForPrisma = globalThis as unknown as {
+    prisma: PrismaClientSingleton | undefined;
+};
+
+const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
 
 export default prisma;
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+
