@@ -1,8 +1,32 @@
 "use client";
 
 import { format } from "date-fns";
-import { Play, ExternalLink } from "lucide-react";
-import { Button } from "@/components/Button";
+import { Play } from "lucide-react";
+
+// Platform Icons (Simple SVGs)
+const Icons = {
+    Spotify: (props: any) => (
+        <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 4.2-1.32 9.6-0.66 13.319 1.62.42.18.6.78.422 1.201zm.12-3.36C15.54 8.7 9.06 8.461 5.28 9.601c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.439-1.321 11.519-1.021 15.119 1.141.54.3.72.96.42 1.5-.3.54-1.02.72-1.559.42z" />
+        </svg>
+    ),
+    AppleMusic: (props: any) => (
+        <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.17 14.38c-.35.14-.74.22-1.17.22-1.66 0-3-1.34-3-3 0-1.26.79-2.34 1.91-2.78V6.5h3.09v2h-1.09v6.86c0 .36-.26.83-.74 1.02z" />
+        </svg>
+    ),
+    YoutubeMusic: (props: any) => (
+        <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="10 8 16 12 10 16 10 8" fill="#000" />
+        </svg>
+    ),
+    Deezer: (props: any) => (
+        <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+            <path d="M2 10.5h3v7H2zm4-3h3v10H6zm4-3h3v13h-3zm4 4h3v9h-3z" />
+        </svg>
+    ),
+};
 
 interface Release {
     id: string;
@@ -72,15 +96,20 @@ export function Discography({ releases }: DiscographyProps) {
                                 </div>
 
                                 {/* Platforms Mini Links */}
-                                <div className="flex items-center gap-3 pt-3 border-t border-white/5 opacity-60 group-hover:opacity-100 transition-opacity">
+                                <div className="flex items-center gap-4 pt-3 border-t border-white/5 opacity-60 group-hover:opacity-100 transition-opacity">
                                     {release.appleMusicUrl && (
-                                        <a href={release.appleMusicUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="Apple Music">
-                                            <ExternalLink className="h-4 w-4" />
+                                        <a href={release.appleMusicUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#fa243c] transition-colors" title="Apple Music">
+                                            <Icons.AppleMusic className="h-5 w-5" />
                                         </a>
                                     )}
                                     {release.youtubeMusicUrl && (
-                                        <a href={release.youtubeMusicUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="YouTube Music">
-                                            <ExternalLink className="h-4 w-4" />
+                                        <a href={release.youtubeMusicUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#ff0000] transition-colors" title="YouTube Music">
+                                            <Icons.YoutubeMusic className="h-5 w-5" />
+                                        </a>
+                                    )}
+                                    {release.deezerUrl && (
+                                        <a href={release.deezerUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#a238ff] transition-colors" title="Deezer">
+                                            <Icons.Deezer className="h-5 w-5" />
                                         </a>
                                     )}
                                 </div>
