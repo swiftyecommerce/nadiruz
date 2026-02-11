@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 async function getData() {
   const [
-    profile,
+    rawProfile,
     socialLinks,
     featuredRelease,
     featuredVideo,
@@ -37,22 +37,41 @@ async function getData() {
     })
   ]);
 
+  const defaultProfile = {
+    id: "default",
+    stageName: "Nadir UZ",
+    realName: "",
+    shortBio: "Profesyonel Müzisyen & Prodüktör",
+    longBio: "Müzik kariyerine...",
+    heroTagline: "SANATÇI",
+    heroHighlight: "YENİ ÇIKAN",
+    aboutTitle: "Hakkımda",
+    aboutHighlight: "Vizyon",
+    location: "İstanbul, Türkiye",
+    heroButtonText: "Spotify'da Dinle",
+    heroButtonUrl: "#",
+    genre: "Rap",
+    activeSince: "2018",
+    profileImageUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1000",
+  };
+
+  const profile = rawProfile ? {
+    ...rawProfile,
+    realName: rawProfile.realName ?? "",
+    heroTagline: rawProfile.heroTagline ?? "",
+    heroHighlight: rawProfile.heroHighlight ?? "",
+    aboutTitle: rawProfile.aboutTitle ?? "",
+    aboutHighlight: rawProfile.aboutHighlight ?? "",
+    location: rawProfile.location ?? "",
+    heroButtonText: rawProfile.heroButtonText ?? "",
+    heroButtonUrl: rawProfile.heroButtonUrl ?? "",
+    genre: rawProfile.genre ?? "",
+    activeSince: rawProfile.activeSince ?? "",
+    profileImageUrl: rawProfile.profileImageUrl ?? "",
+  } : defaultProfile;
+
   return {
-    profile: profile || {
-      stageName: "Nadir UZ",
-      heroTagline: "RAP SANATÇISI",
-      shortBio: "Hoşgeldiniz.",
-      longBio: "Biyografi henüz eklenmedi.",
-      heroHighlight: "",
-      location: "Türkiye",
-      genre: "Hip-Hop",
-      activeSince: "2018",
-      profileImageUrl: "https://images.unsplash.com/photo-1571266028243-e4733b0f0bb1?auto=format&fit=crop&q=80&w=1000",
-      heroButtonText: "Spotify'da Dinle",
-      heroButtonUrl: "#",
-      aboutTitle: "Sesteki Vizyon",
-      aboutHighlight: "Vizyon",
-    },
+    profile,
     socialLinks: socialLinks || [],
     featuredRelease: featuredRelease || null,
     featuredVideo: featuredVideo || null,

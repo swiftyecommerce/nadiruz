@@ -1,0 +1,47 @@
+
+> nadiruz@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+[2m[DEBUG][22m Writing debug info to: [2m[34m`[39m[22m[34mC:\Users\serha\Downloads\yapayjeler\nadiruz\tailwindcss-19980.log[39m[2m[34m`[39m[22m
+
+
+[2m[140.61ms][22m [@tailwindcss/postcss] src\app\globals.css
+[2m[  0.07ms][22m  [2m ↳ [22mQuick bail check
+[2m[ 29.26ms][22m  [2m ↳ [22mSetup compiler
+[2m[  0.38ms][22m    [2m ↳ [22mPostCSS AST -> Tailwind CSS AST
+[2m[ 28.86ms][22m    [2m ↳ [22mCreate compiler
+[2m[  0.37ms][22m  [2m ↳ [22mRegister full rebuild paths
+[2m[  3.23ms][22m  [2m ↳ [22mSetup scanner
+[2m[ 18.71ms][22m  [2m ↳ [22mScan for candidates
+[2m[ 28.85ms][22m  [2m ↳ [22mRegister dependency messages
+[2m[ 32.14ms][22m  [2m ↳ [22mBuild utilities
+[2m[ 23.55ms][22m  [2m ↳ [22mOptimization
+[2m[  0.99ms][22m    [2m ↳ [22mAST -> CSS
+[2m[ 10.13ms][22m    [2m ↳ [22mLightning CSS
+[2m[ 12.39ms][22m    [2m ↳ [22mCSS -> PostCSS AST
+[2m[  3.90ms][22m  [2m ↳ [22mUpdate PostCSS AST
+
+✓ Compiled successfully in 2.5s
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/admin/dashboard/profile/page.tsx:28:30
+Type error: Type '{ id: string; stageName: string; realName: string | null; shortBio: string; longBio: string; heroTagline: string | null; heroHighlight: string | null; aboutTitle: string | null; aboutHighlight: string | null; ... 5 more ...; profileImageUrl: string | null; } | { ...; }' is not assignable to type '{ id: string; stageName: string; realName: string | null; heroTagline: string; heroHighlight: string; shortBio: string; longBio: string; location: string | null; genre: string | null; activeSince: string | null; ... 4 more ...; aboutHighlight?: string | ... 1 more ... | undefined; }'.
+  Type '{ id: string; stageName: string; realName: string | null; shortBio: string; longBio: string; heroTagline: string | null; heroHighlight: string | null; aboutTitle: string | null; aboutHighlight: string | null; ... 5 more ...; profileImageUrl: string | null; }' is not assignable to type '{ id: string; stageName: string; realName: string | null; heroTagline: string; heroHighlight: string; shortBio: string; longBio: string; location: string | null; genre: string | null; activeSince: string | null; ... 4 more ...; aboutHighlight?: string | ... 1 more ... | undefined; }'.
+    Types of property 'heroTagline' are incompatible.
+      Type 'string | null' is not assignable to type 'string'.
+        Type 'null' is not assignable to type 'string'.
+
+[0m [90m 26 |[39m
+ [90m 27 |[39m             [33m<[39m[33mdiv[39m className[33m=[39m[32m"bg-[#111111] border border-white/5 p-10 rounded-3xl shadow-2xl"[39m[33m>[39m
+[31m[1m>[22m[39m[90m 28 |[39m                 [33m<[39m[33mProfileForm[39m initialData[33m=[39m{profile} [33m/[39m[33m>[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 29 |[39m             [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 30 |[39m         [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 31 |[39m     )[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null
