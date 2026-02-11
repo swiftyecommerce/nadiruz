@@ -23,20 +23,23 @@ interface HeroProps {
 export function Hero({ profile, featuredVideo }: HeroProps) {
     const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-    const getEmbedUrl = (url: string) => {
+    const getYoutubeId = (url: string) => {
+        if (!url) return null;
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         const match = url.match(regExp);
-        return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : null;
+        return (match && match[2].length === 11) ? match[2] : null;
     };
+
+    const videoId = featuredVideo?.youtubeUrl ? getYoutubeId(featuredVideo.youtubeUrl) : null;
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
             {/* Background Video */}
-            {featuredVideo && (
+            {featuredVideo && videoId && (
                 <div className="absolute inset-0 w-full h-full overflow-hidden z-[-1]">
                     <div className="absolute inset-0 bg-black/80 z-10" /> {/* Overlay to darken/fade */}
                     <iframe
-                        src={`${getEmbedUrl(featuredVideo.youtubeUrl)}?autoplay=1&mute=1&controls=0&loop=1&playlist=${featuredVideo.youtubeUrl.match(/(?:v=|\/)([\w-]{11})/)?.[1]}`}
+                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}`}
                         className="w-full h-[300%] lg:h-[150%] w-[300%] lg:w-[150%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 pointer-events-none grayscale"
                         allow="autoplay; encrypted-media"
                         tabIndex={-1}
@@ -99,7 +102,7 @@ export function Hero({ profile, featuredVideo }: HeroProps) {
             </div>
 
             {/* Video Modal */}
-            {isVideoOpen && featuredVideo && (
+            {isVideoOpen && featuredVideo && videoId && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" onClick={() => setIsVideoOpen(false)}>
                     <div className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10" onClick={(e) => e.stopPropagation()}>
                         <button
@@ -109,7 +112,7 @@ export function Hero({ profile, featuredVideo }: HeroProps) {
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
                         </button>
                         <iframe
-                            src={`${getEmbedUrl(featuredVideo.youtubeUrl)}?autoplay=1`}
+                            src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
                             className="w-full h-full"
                             allow="autoplay; encrypted-media"
                             allowFullScreen
