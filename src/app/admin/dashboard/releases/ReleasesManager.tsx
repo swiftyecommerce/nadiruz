@@ -59,11 +59,32 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
         e.preventDefault();
         setIsLoading(true);
         try {
+            // Clean payload to ensure only valid fields are sent
+            const payload = {
+                id: editingId || undefined,
+                title: formData.title,
+                releaseType: formData.releaseType,
+                coverImageUrl: formData.coverImageUrl,
+                description: formData.description,
+                releaseDate: formData.releaseDate,
+                spotifyUrl: formData.spotifyUrl,
+                appleMusicUrl: formData.appleMusicUrl,
+                youtubeMusicUrl: formData.youtubeMusicUrl,
+                deezerUrl: formData.deezerUrl,
+                isFeatured: formData.isFeatured,
+            };
+
             const res = await fetch("/api/admin/releases", {
                 method: editingId ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(editingId ? { ...formData, id: editingId } : formData),
+                body: JSON.stringify(payload),
             });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                alert(`Hata: ${errorData.message || "Kaydetme işlemi başarısız oldu."}`);
+                return;
+            }
 
             if (res.ok) {
                 const savedRelease = await res.json();

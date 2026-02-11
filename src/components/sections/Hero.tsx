@@ -31,6 +31,19 @@ export function Hero({ profile, featuredVideo }: HeroProps) {
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+            {/* Background Video */}
+            {featuredVideo && (
+                <div className="absolute inset-0 w-full h-full overflow-hidden z-[-1]">
+                    <div className="absolute inset-0 bg-black/80 z-10" /> {/* Overlay to darken/fade */}
+                    <iframe
+                        src={`${getEmbedUrl(featuredVideo.youtubeUrl)}?autoplay=1&mute=1&controls=0&loop=1&playlist=${featuredVideo.youtubeUrl.match(/(?:v=|\/)([\w-]{11})/)?.[1]}`}
+                        className="w-full h-[300%] lg:h-[150%] w-[300%] lg:w-[150%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 pointer-events-none grayscale"
+                        allow="autoplay; encrypted-media"
+                        tabIndex={-1}
+                    />
+                </div>
+            )}
+
             {/* Background Glows */}
             <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#39ff14]/10 rounded-full blur-[120px] -z-10" />
             <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#9d00ff]/10 rounded-full blur-[120px] -z-10" />
