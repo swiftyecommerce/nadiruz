@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
@@ -21,6 +22,7 @@ export async function POST(request: Request) {
             },
         });
 
+        revalidatePath("/");
         return NextResponse.json(profile);
     } catch (error) {
         console.error("Profile update error:", error);

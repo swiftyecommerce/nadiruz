@@ -11,7 +11,7 @@ import { Discography } from "@/components/sections/Discography";
 
 import prisma from "@/lib/prisma";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60; // ISR: cache 60 saniye, her istekte DB sorgusu yapma
 
 async function getData() {
   const [
