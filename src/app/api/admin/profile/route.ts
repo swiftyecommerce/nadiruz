@@ -29,7 +29,8 @@ export async function POST(request: Request) {
         tryRevalidate();
         return NextResponse.json(profile);
     } catch (error) {
-        console.error("Profile update error:", error);
-        return NextResponse.json({ message: "Failed to update profile" }, { status: 500 });
+        console.error("Profile POST error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }

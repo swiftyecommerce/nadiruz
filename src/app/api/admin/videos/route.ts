@@ -28,7 +28,9 @@ export async function POST(request: Request) {
         tryRevalidate();
         return NextResponse.json(video);
     } catch (error) {
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        console.error("Videos POST error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }
 
@@ -54,7 +56,9 @@ export async function PUT(request: Request) {
         tryRevalidate();
         return NextResponse.json(video);
     } catch (error) {
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        console.error("Videos PUT error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }
 
@@ -72,6 +76,8 @@ export async function DELETE(request: Request) {
         tryRevalidate();
         return NextResponse.json({ message: "Deleted" });
     } catch (error) {
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        console.error("Videos DELETE error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }

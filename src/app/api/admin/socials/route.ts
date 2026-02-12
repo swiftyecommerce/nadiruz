@@ -17,7 +17,9 @@ export async function POST(request: Request) {
         tryRevalidate();
         return NextResponse.json(link);
     } catch (error) {
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        console.error("Socials POST error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }
 
@@ -35,7 +37,9 @@ export async function PUT(request: Request) {
         tryRevalidate();
         return NextResponse.json(link);
     } catch (error) {
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        console.error("Socials PUT error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }
 
@@ -53,6 +57,8 @@ export async function DELETE(request: Request) {
         tryRevalidate();
         return NextResponse.json({ message: "Deleted" });
     } catch (error) {
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        console.error("Socials DELETE error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }

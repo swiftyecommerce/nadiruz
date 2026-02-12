@@ -27,6 +27,8 @@ export async function POST(request: Request) {
         tryRevalidate();
         return NextResponse.json(contact);
     } catch (error) {
-        return NextResponse.json({ message: "Error" }, { status: 500 });
+        console.error("Contact POST error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        return NextResponse.json({ message }, { status: 500 });
     }
 }
