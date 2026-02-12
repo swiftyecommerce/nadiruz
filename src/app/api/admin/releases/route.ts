@@ -3,6 +3,10 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+function tryRevalidate() {
+    try { revalidatePath("/"); } catch { /* ignore */ }
+}
+
 export async function POST(request: Request) {
     const session = await getSession();
     if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -12,7 +16,6 @@ export async function POST(request: Request) {
         const { id, isFeatured, ...rest } = data;
 
         if (isFeatured) {
-            // Unset all other featured releases
             await prisma.release.updateMany({
                 where: { isFeatured: true },
                 data: { isFeatured: false },
@@ -26,7 +29,7 @@ export async function POST(request: Request) {
                 releaseDate: new Date(rest.releaseDate),
             },
         });
-        revalidatePath("/");
+        tryRevalidate();
         return NextResponse.json(release);
     } catch (error) {
         console.error(error);
@@ -57,7 +60,7 @@ export async function PUT(request: Request) {
                 releaseDate: new Date(rest.releaseDate),
             },
         });
-        revalidatePath("/");
+        tryRevalidate();
         return NextResponse.json(release);
     } catch (error) {
         console.error(error);
@@ -76,7 +79,7 @@ export async function DELETE(request: Request) {
 
     try {
         await prisma.release.delete({ where: { id } });
-        revalidatePath("/");
+        tryRevalidate();
         return NextResponse.json({ message: "Deleted" });
     } catch (error) {
         return NextResponse.json({ message: "Error" }, { status: 500 });

@@ -3,6 +3,10 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+function tryRevalidate() {
+    try { revalidatePath("/"); } catch { /* ignore */ }
+}
+
 export async function POST(request: Request) {
     const session = await getSession();
     if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -15,7 +19,7 @@ export async function POST(request: Request) {
                 date: new Date(data.date),
             },
         });
-        revalidatePath("/");
+        tryRevalidate();
         return NextResponse.json(show);
     } catch (error) {
         return NextResponse.json({ message: "Error" }, { status: 500 });
@@ -36,7 +40,7 @@ export async function PUT(request: Request) {
                 date: new Date(updateData.date),
             },
         });
-        revalidatePath("/");
+        tryRevalidate();
         return NextResponse.json(show);
     } catch (error) {
         return NextResponse.json({ message: "Error" }, { status: 500 });
@@ -54,7 +58,7 @@ export async function DELETE(request: Request) {
 
     try {
         await prisma.show.delete({ where: { id } });
-        revalidatePath("/");
+        tryRevalidate();
         return NextResponse.json({ message: "Deleted" });
     } catch (error) {
         return NextResponse.json({ message: "Error" }, { status: 500 });

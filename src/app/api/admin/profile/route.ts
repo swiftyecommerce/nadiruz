@@ -3,6 +3,10 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+function tryRevalidate() {
+    try { revalidatePath("/"); } catch { /* ignore */ }
+}
+
 export async function POST(request: Request) {
     const session = await getSession();
     if (!session) {
@@ -22,7 +26,7 @@ export async function POST(request: Request) {
             },
         });
 
-        revalidatePath("/");
+        tryRevalidate();
         return NextResponse.json(profile);
     } catch (error) {
         console.error("Profile update error:", error);
