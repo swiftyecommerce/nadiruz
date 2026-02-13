@@ -222,7 +222,7 @@ export function ProfileForm() {
                                         });
                                         if (res.ok) {
                                             const data = await res.json();
-                                            setFormData(prev => ({ ...prev, profileImageUrl: data.url }));
+                                            setFormData((prev: any) => ({ ...prev, profileImageUrl: data.url }));
                                         }
                                     } catch (err) {
                                         console.error("Upload failed", err);
@@ -238,7 +238,7 @@ export function ProfileForm() {
                             <img src={formData.profileImageUrl} alt="Profil Önizleme" className="w-full h-full object-cover" />
                             <button
                                 type="button"
-                                onClick={() => setFormData(prev => ({ ...prev, profileImageUrl: "" }))}
+                                onClick={() => setFormData((prev: any) => ({ ...prev, profileImageUrl: "" }))}
                                 className="absolute top-2 right-2 p-2 bg-black/50 text-white rounded-full hover:bg-red-500 transition-colors"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
