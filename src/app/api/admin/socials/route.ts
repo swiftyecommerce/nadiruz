@@ -3,8 +3,6 @@ import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
 export async function GET() {
-    const session = await getSession();
-    if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
     try {
         const links = await prisma.socialLink.findMany({ orderBy: { order: "asc" } });
