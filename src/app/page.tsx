@@ -11,7 +11,7 @@ import { Discography } from "@/components/sections/Discography";
 
 import prisma from "@/lib/prisma";
 
-export const revalidate = 60; // ISR: cache 60 saniye, her istekte DB sorgusu yapma
+export const revalidate = 300; // ISR: cache 5 dakika — Hostinger shared hosting için düşük yük
 
 async function getData() {
   const [

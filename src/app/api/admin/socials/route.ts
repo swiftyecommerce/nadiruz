@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
-
-function tryRevalidate() {
-    try { revalidatePath("/"); } catch { /* ignore */ }
-}
 
 export async function POST(request: Request) {
     const session = await getSession();
@@ -14,7 +9,6 @@ export async function POST(request: Request) {
     try {
         const data = await request.json();
         const link = await prisma.socialLink.create({ data });
-        tryRevalidate();
         return NextResponse.json(link);
     } catch (error) {
         console.error("Socials POST error:", error);
@@ -34,7 +28,6 @@ export async function PUT(request: Request) {
             where: { id },
             data: updateData,
         });
-        tryRevalidate();
         return NextResponse.json(link);
     } catch (error) {
         console.error("Socials PUT error:", error);
@@ -54,7 +47,6 @@ export async function DELETE(request: Request) {
 
     try {
         await prisma.socialLink.delete({ where: { id } });
-        tryRevalidate();
         return NextResponse.json({ message: "Deleted" });
     } catch (error) {
         console.error("Socials DELETE error:", error);

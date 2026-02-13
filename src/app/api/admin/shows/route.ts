@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
-
-function tryRevalidate() {
-    try { revalidatePath("/"); } catch { /* ignore */ }
-}
 
 export async function POST(request: Request) {
     const session = await getSession();
@@ -19,7 +14,6 @@ export async function POST(request: Request) {
                 date: new Date(data.date),
             },
         });
-        tryRevalidate();
         return NextResponse.json(show);
     } catch (error) {
         console.error("Shows POST error:", error);
@@ -42,7 +36,6 @@ export async function PUT(request: Request) {
                 date: new Date(updateData.date),
             },
         });
-        tryRevalidate();
         return NextResponse.json(show);
     } catch (error) {
         console.error("Shows PUT error:", error);
@@ -62,7 +55,6 @@ export async function DELETE(request: Request) {
 
     try {
         await prisma.show.delete({ where: { id } });
-        tryRevalidate();
         return NextResponse.json({ message: "Deleted" });
     } catch (error) {
         console.error("Shows DELETE error:", error);
