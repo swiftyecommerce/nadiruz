@@ -1,11 +1,6 @@
-import prisma from "@/lib/prisma";
 import { SocialLinksManager } from "./SocialLinksManager";
 
-export default async function SocialsPage() {
-    const socialLinks = await prisma.socialLink.findMany({
-        orderBy: { order: "asc" },
-    });
-
+export default function SocialsPage() {
     return (
         <div className="space-y-8 max-w-5xl">
             <div>
@@ -14,7 +9,7 @@ export default async function SocialsPage() {
             </div>
 
             <div className="bg-[#111111] border border-white/5 p-10 rounded-3xl shadow-2xl">
-                <SocialLinksManager initialData={socialLinks} />
+                <SocialLinksManager />
             </div>
         </div>
     );

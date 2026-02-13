@@ -1,11 +1,6 @@
-import prisma from "@/lib/prisma";
 import { ShowsManager } from "./ShowsManager";
 
-export default async function ShowsPage() {
-    const shows = await prisma.show.findMany({
-        orderBy: { date: "asc" },
-    });
-
+export default function ShowsPage() {
     return (
         <div className="space-y-8 max-w-6xl">
             <div>
@@ -14,7 +9,7 @@ export default async function ShowsPage() {
             </div>
 
             <div className="bg-[#111111] border border-white/5 p-10 rounded-3xl shadow-2xl">
-                <ShowsManager initialData={shows} />
+                <ShowsManager />
             </div>
         </div>
     );

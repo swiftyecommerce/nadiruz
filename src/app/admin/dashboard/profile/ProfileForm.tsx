@@ -1,34 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import { Check, Loader2 } from "lucide-react";
 
-interface ProfileFormProps {
-    initialData: {
-        id: string;
-        stageName: string;
-        realName: string | null;
-        heroTagline: string;
-        heroHighlight: string;
-        shortBio: string;
-        longBio: string;
-        location: string | null;
-        genre: string | null;
-        activeSince: string | null;
-        profileImageUrl: string | null;
-        heroButtonText?: string | null;
-        heroButtonUrl?: string | null;
-        aboutTitle?: string | null;
-        aboutHighlight?: string | null;
-    };
-}
+const defaultProfile = {
+    id: "default_profile",
+    stageName: "",
+    realName: "",
+    heroTagline: "",
+    heroHighlight: "",
+    shortBio: "",
+    longBio: "",
+    location: "",
+    genre: "",
+    activeSince: "",
+    profileImageUrl: "",
+    heroButtonText: "",
+    heroButtonUrl: "",
+    aboutTitle: "",
+    aboutHighlight: "",
+};
 
-export function ProfileForm({ initialData }: ProfileFormProps) {
-    const [formData, setFormData] = useState(initialData);
+export function ProfileForm() {
+    const [formData, setFormData] = useState(defaultProfile as any);
     const [isSaving, setIsSaving] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        fetchWithTimeout("/api/admin/profile")
+            .then(res => res.json())
+            .then(data => setFormData(data))
+            .catch(() => alert("Profil verileri yüklenemedi."))
+            .finally(() => setIsLoaded(true));
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

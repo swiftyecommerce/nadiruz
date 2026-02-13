@@ -29,6 +29,15 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+tailwindcss-*.log
+
+# temp / dev artifacts
+prisma/dev.db
+build-log.txt
+prisma-generate-log.txt
+test-mysql2-ssl.txt
+database.json
+run_prisma.bat
 
 # env files (can opt-in for committing if needed)
 .env*

@@ -2,6 +2,19 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+export async function GET() {
+    const session = await getSession();
+    if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+
+    try {
+        const shows = await prisma.show.findMany({ orderBy: { date: "asc" } });
+        return NextResponse.json(shows);
+    } catch (error) {
+        console.error("Shows GET error:", error);
+        return NextResponse.json({ message: "DB error" }, { status: 500 });
+    }
+}
+
 export async function POST(request: Request) {
     const session = await getSession();
     if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });

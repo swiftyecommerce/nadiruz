@@ -2,6 +2,26 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+export async function GET() {
+    const session = await getSession();
+    if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+
+    try {
+        const contact = await prisma.contactInfo.findFirst();
+        return NextResponse.json(contact || {
+            id: "default_contact",
+            managementEmail: "mgmt@nadiruz.net",
+            bookingEmail: "booking@nadiruz.net",
+            pressEmail: "",
+            whatsappNumber: "",
+            instagramDmLink: "",
+        });
+    } catch (error) {
+        console.error("Contact GET error:", error);
+        return NextResponse.json({ message: "DB error" }, { status: 500 });
+    }
+}
+
 export async function POST(request: Request) {
     const session = await getSession();
     if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });

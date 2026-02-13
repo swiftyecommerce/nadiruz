@@ -1,11 +1,6 @@
-import prisma from "@/lib/prisma";
 import { VideosManager } from "./VideosManager";
 
-export default async function VideosPage() {
-    const videos = await prisma.video.findMany({
-        orderBy: { id: "desc" },
-    });
-
+export default function VideosPage() {
     return (
         <div className="space-y-8 max-w-6xl">
             <div>
@@ -14,7 +9,7 @@ export default async function VideosPage() {
             </div>
 
             <div className="bg-[#111111] border border-white/5 p-10 rounded-3xl shadow-2xl">
-                <VideosManager initialData={videos} />
+                <VideosManager />
             </div>
         </div>
     );
