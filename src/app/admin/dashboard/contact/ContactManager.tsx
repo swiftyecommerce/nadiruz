@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import { Check, Loader2, Mail, Phone, Instagram } from "lucide-react";
 
@@ -28,7 +29,7 @@ export function ContactManager({ initialData }: ContactManagerProps) {
         setSuccess(false);
 
         try {
-            const res = await fetch("/api/admin/contact", {
+            const res = await fetchWithTimeout("/api/admin/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -37,9 +38,12 @@ export function ContactManager({ initialData }: ContactManagerProps) {
             if (res.ok) {
                 setSuccess(true);
                 setTimeout(() => setSuccess(false), 3000);
+            } else {
+                alert("Kaydetme başarısız oldu. Lütfen tekrar deneyin.");
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsSaving(false);
         }

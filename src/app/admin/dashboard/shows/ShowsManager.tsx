@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
+import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import {
     Plus,
@@ -51,7 +52,7 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
         e.preventDefault();
         setIsLoading(true);
         try {
-            const res = await fetch("/api/admin/shows", {
+            const res = await fetchWithTimeout("/api/admin/shows", {
                 method: editingId ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(editingId ? { ...formData, id: editingId } : formData),
@@ -67,9 +68,12 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
                 setIsFormOpen(false);
                 setEditingId(null);
                 setFormData(emptyForm);
+            } else {
+                alert("Kaydetme başarısız oldu. Lütfen tekrar deneyin.");
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }
@@ -79,12 +83,15 @@ export function ShowsManager({ initialData }: ShowsManagerProps) {
         if (!confirm("Bu konseri silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
-            const res = await fetch(`/api/admin/shows?id=${id}`, { method: "DELETE" });
+            const res = await fetchWithTimeout(`/api/admin/shows?id=${id}`, { method: "DELETE" });
             if (res.ok) {
                 setShows(shows.filter(s => s.id !== id));
+            } else {
+                alert("Silme işlemi başarısız oldu.");
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
+import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import {
     Plus,
@@ -74,7 +75,7 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                 isFeatured: formData.isFeatured,
             };
 
-            const res = await fetch("/api/admin/releases", {
+            const res = await fetchWithTimeout("/api/admin/releases", {
                 method: editingId ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -106,8 +107,9 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
                 setEditingId(null);
                 setFormData(emptyForm);
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }
@@ -117,12 +119,13 @@ export function ReleasesManager({ initialData }: ReleasesManagerProps) {
         if (!confirm("Bu yayını silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
-            const res = await fetch(`/api/admin/releases?id=${id}`, { method: "DELETE" });
+            const res = await fetchWithTimeout(`/api/admin/releases?id=${id}`, { method: "DELETE" });
             if (res.ok) {
                 setReleases(releases.filter(r => r.id !== id));
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }

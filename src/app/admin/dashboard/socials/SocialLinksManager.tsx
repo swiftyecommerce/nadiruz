@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import {
     Plus,
@@ -73,7 +74,7 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
     const handleSave = async (id?: string) => {
         setIsLoading(true);
         try {
-            const res = await fetch("/api/admin/socials", {
+            const res = await fetchWithTimeout("/api/admin/socials", {
                 method: id ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(id ? { ...formData, id } : formData),
@@ -90,9 +91,13 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
                 }
                 setFormData({ platform: "", url: "", iconType: "", isPrimary: false, order: 0 });
                 setShowCustomFields(false);
+            } else {
+                const err = await res.json().catch(() => ({ message: "Bilinmeyen hata" }));
+                alert(`Hata: ${err.message}`);
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }
@@ -102,12 +107,15 @@ export function SocialLinksManager({ initialData }: SocialLinksManagerProps) {
         if (!confirm("Bu linki silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
-            const res = await fetch(`/api/admin/socials?id=${id}`, { method: "DELETE" });
+            const res = await fetchWithTimeout(`/api/admin/socials?id=${id}`, { method: "DELETE" });
             if (res.ok) {
                 setLinks(links.filter(l => l.id !== id));
+            } else {
+                alert("Silme işlemi başarısız oldu.");
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import {
     Plus,
@@ -46,7 +47,7 @@ export function VideosManager({ initialData }: VideosManagerProps) {
         e.preventDefault();
         setIsLoading(true);
         try {
-            const res = await fetch("/api/admin/videos", {
+            const res = await fetchWithTimeout("/api/admin/videos", {
                 method: editingId ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(editingId ? { ...formData, id: editingId } : formData),
@@ -72,9 +73,9 @@ export function VideosManager({ initialData }: VideosManagerProps) {
             } else {
                 alert("Video kaydedilemedi. Lütfen tekrar deneyin.");
             }
-        } catch (error) {
-            console.error(error);
-            alert("Bir hata oluştu.");
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }
@@ -84,12 +85,13 @@ export function VideosManager({ initialData }: VideosManagerProps) {
         if (!confirm("Bu videoyu silmek istediğinize emin misiniz?")) return;
         setIsLoading(true);
         try {
-            const res = await fetch(`/api/admin/videos?id=${id}`, { method: "DELETE" });
+            const res = await fetchWithTimeout(`/api/admin/videos?id=${id}`, { method: "DELETE" });
             if (res.ok) {
                 setVideos(videos.filter(v => v.id !== id));
             }
-        } catch (error) {
-            console.error(error);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : "Bağlantı hatası";
+            alert(msg);
         } finally {
             setIsLoading(false);
         }
