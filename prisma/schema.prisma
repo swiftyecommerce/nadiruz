@@ -3,16 +3,17 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model ArtistProfile {
   id             String  @id @default(cuid())
   stageName      String  @default("Nadir UZ")
   realName       String?
-  shortBio       String  @db.Text
-  longBio        String  @db.Text
+  shortBio       String
+  longBio        String
   heroTagline    String?
   heroHighlight  String?
   aboutTitle     String? @default("Sesteki Vizyon")
@@ -39,7 +40,7 @@ model Release {
   title           String
   releaseType     String // "Single", "EP", "Album"
   coverImageUrl   String
-  description     String?  @db.Text
+  description     String?
   releaseDate     DateTime
   spotifyUrl      String?
   appleMusicUrl   String?
@@ -62,7 +63,7 @@ model Show {
   venue       String
   date        DateTime
   ticketUrl   String?
-  note        String?  @db.Text
+  note        String?
   isCancelled Boolean  @default(false)
 }
 
