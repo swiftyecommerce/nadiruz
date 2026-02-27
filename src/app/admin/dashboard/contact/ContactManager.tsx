@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import { Check, Loader2, Mail, Phone, Instagram } from "lucide-react";
@@ -14,28 +14,10 @@ interface ContactInfo {
     instagramDmLink: string | null;
 }
 
-const defaultContact: ContactInfo = {
-    id: "default_contact",
-    managementEmail: "",
-    bookingEmail: "",
-    pressEmail: "",
-    whatsappNumber: "",
-    instagramDmLink: "",
-};
-
-export function ContactManager() {
-    const [formData, setFormData] = useState<ContactInfo>(defaultContact);
+export function ContactManager({ initialData }: { initialData: ContactInfo }) {
+    const [formData, setFormData] = useState<ContactInfo>(initialData);
     const [isSaving, setIsSaving] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        fetchWithTimeout("/api/admin/contact")
-            .then(res => res.json())
-            .then(data => setFormData(data))
-            .catch(() => alert("Veriler yüklenemedi."))
-            .finally(() => setIsLoaded(true));
-    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
@@ -31,18 +31,9 @@ interface Release {
     isFeatured: boolean;
 }
 
-export function ReleasesManager() {
-    const [releases, setReleases] = useState<Release[]>([]);
+export function ReleasesManager({ initialData }: { initialData: Release[] }) {
+    const [releases, setReleases] = useState<Release[]>(initialData);
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [initialLoading, setInitialLoading] = useState(true);
-
-    useEffect(() => {
-        fetchWithTimeout("/api/admin/releases")
-            .then(res => res.json())
-            .then(data => setReleases(data))
-            .catch(() => alert("Veriler yüklenemedi."))
-            .finally(() => setInitialLoading(false));
-    }, []);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 

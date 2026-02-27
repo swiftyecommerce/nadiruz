@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import {
@@ -59,21 +59,13 @@ const ICON_OPTIONS = [
     { name: "Paylaş", id: "Share", icon: Share2 },
 ];
 
-export function SocialLinksManager() {
-    const [links, setLinks] = useState<SocialLink[]>([]);
+export function SocialLinksManager({ initialData }: { initialData: SocialLink[] }) {
+    const [links, setLinks] = useState<SocialLink[]>(initialData);
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [isAdding, setIsAdding] = useState(false);
     const [formData, setFormData] = useState<Partial<SocialLink>>({ platform: "", url: "", iconType: "", isPrimary: false, order: 0 });
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [showCustomFields, setShowCustomFields] = useState(false);
-
-    useEffect(() => {
-        fetchWithTimeout("/api/admin/socials")
-            .then(res => res.json())
-            .then(data => setLinks(data))
-            .catch(() => alert("Veriler yüklenemedi."))
-            .finally(() => setIsLoading(false));
-    }, []);
 
     const handleSave = async (id?: string) => {
         setIsLoading(true);

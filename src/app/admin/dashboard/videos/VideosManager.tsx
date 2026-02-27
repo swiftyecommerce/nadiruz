@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import {
@@ -24,18 +24,9 @@ interface Video {
     isFeatured: boolean;
 }
 
-export function VideosManager() {
-    const [videos, setVideos] = useState<Video[]>([]);
+export function VideosManager({ initialData }: { initialData: Video[] }) {
+    const [videos, setVideos] = useState<Video[]>(initialData);
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [initialLoading, setInitialLoading] = useState(true);
-
-    useEffect(() => {
-        fetchWithTimeout("/api/admin/videos")
-            .then(res => res.json())
-            .then(data => setVideos(data))
-            .catch(() => alert("Veriler yüklenemedi."))
-            .finally(() => setInitialLoading(false));
-    }, []);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 

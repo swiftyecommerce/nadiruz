@@ -1,6 +1,30 @@
 import { ProfileForm } from "./ProfileForm";
+import prisma from "@/lib/prisma";
 
-export default function ProfilePage() {
+export const dynamic = "force-dynamic";
+
+export default async function ProfilePage() {
+    const rawProfile = await prisma.artistProfile.findFirst();
+
+    // Fallback if empty in DB
+    const profile = rawProfile || {
+        id: "default_profile",
+        stageName: "",
+        realName: "",
+        heroTagline: "",
+        heroHighlight: "",
+        shortBio: "",
+        longBio: "",
+        location: "",
+        genre: "",
+        activeSince: "",
+        profileImageUrl: "",
+        heroButtonText: "",
+        heroButtonUrl: "",
+        aboutTitle: "",
+        aboutHighlight: "",
+    };
+
     return (
         <div className="space-y-8 max-w-4xl">
             <div>
@@ -9,7 +33,7 @@ export default function ProfilePage() {
             </div>
 
             <div className="bg-[#111111] border border-white/5 p-10 rounded-3xl shadow-2xl">
-                <ProfileForm />
+                <ProfileForm initialData={profile} />
             </div>
         </div>
     );

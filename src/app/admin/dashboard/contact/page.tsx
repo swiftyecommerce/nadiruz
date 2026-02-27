@@ -1,6 +1,21 @@
 import { ContactManager } from "./ContactManager";
+import prisma from "@/lib/prisma";
 
-export default function ContactInfoPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ContactInfoPage() {
+    const contactInfo = await prisma.contactInfo.findFirst();
+
+    // Default structure if empty in DB
+    const initialData = contactInfo || {
+        id: "default_contact",
+        managementEmail: "",
+        bookingEmail: "",
+        pressEmail: "",
+        whatsappNumber: "",
+        instagramDmLink: "",
+    };
+
     return (
         <div className="space-y-8 max-w-4xl">
             <div>
@@ -9,7 +24,7 @@ export default function ContactInfoPage() {
             </div>
 
             <div className="bg-[#111111] border border-white/5 p-10 rounded-3xl shadow-2xl">
-                <ContactManager />
+                <ContactManager initialData={initialData} />
             </div>
         </div>
     );

@@ -1,41 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
 import { Check, Loader2 } from "lucide-react";
 
-const defaultProfile = {
-    id: "default_profile",
-    stageName: "",
-    realName: "",
-    heroTagline: "",
-    heroHighlight: "",
-    shortBio: "",
-    longBio: "",
-    location: "",
-    genre: "",
-    activeSince: "",
-    profileImageUrl: "",
-    heroButtonText: "",
-    heroButtonUrl: "",
-    aboutTitle: "",
-    aboutHighlight: "",
-};
-
-export function ProfileForm() {
-    const [formData, setFormData] = useState(defaultProfile as any);
+export function ProfileForm({ initialData }: { initialData: any }) {
+    const [formData, setFormData] = useState(initialData);
     const [isSaving, setIsSaving] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        fetchWithTimeout("/api/admin/profile")
-            .then(res => res.json())
-            .then(data => setFormData(data))
-            .catch(() => alert("Profil verileri yüklenemedi."))
-            .finally(() => setIsLoaded(true));
-    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

@@ -9,20 +9,20 @@ datasource db {
 }
 
 model ArtistProfile {
-  id             String  @id @default(cuid())
-  stageName      String  @default("Nadir UZ")
-  realName       String?
-  shortBio       String
-  longBio        String
-  heroTagline    String?
-  heroHighlight  String?
-  aboutTitle     String? @default("Sesteki Vizyon")
-  aboutHighlight String? @default("Vizyon")
-  location       String?
-  heroButtonText String? @default("Spotify'da Dinle")
-  heroButtonUrl  String? @default("#")
-  genre          String?
-  activeSince    String?
+  id              String  @id @default(cuid())
+  stageName       String  @default("Nadir UZ")
+  realName        String?
+  shortBio        String
+  longBio         String
+  heroTagline     String?
+  heroHighlight   String?
+  aboutTitle      String? @default("Sesteki Vizyon")
+  aboutHighlight  String? @default("Vizyon")
+  location        String?
+  heroButtonText  String? @default("Spotify'da Dinle")
+  heroButtonUrl   String? @default("#")
+  genre           String?
+  activeSince     String?
   profileImageUrl String?
 }
 
@@ -38,7 +38,7 @@ model SocialLink {
 model Release {
   id              String   @id @default(cuid())
   title           String
-  releaseType     String // "Single", "EP", "Album"
+  releaseType     String
   coverImageUrl   String
   description     String?
   releaseDate     DateTime

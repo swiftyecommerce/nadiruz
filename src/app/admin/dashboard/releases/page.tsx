@@ -1,6 +1,11 @@
 import { ReleasesManager } from "./ReleasesManager";
+import prisma from "@/lib/prisma";
 
-export default function ReleasesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ReleasesPage() {
+    const releases = await prisma.release.findMany({ orderBy: { releaseDate: "desc" } });
+
     return (
         <div className="space-y-8">
             <div>
@@ -9,7 +14,7 @@ export default function ReleasesPage() {
             </div>
 
             <div className="bg-[#111111] border border-white/5 p-10 rounded-3xl shadow-2xl">
-                <ReleasesManager />
+                <ReleasesManager initialData={releases} />
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
 import { fetchWithTimeout } from "@/lib/fetchWithTimeout";
 import { Button } from "@/components/Button";
@@ -27,18 +27,11 @@ interface Show {
     isCancelled: boolean;
 }
 
-export function ShowsManager() {
-    const [shows, setShows] = useState<Show[]>([]);
+export function ShowsManager({ initialData }: { initialData: Show[] }) {
+    const [shows, setShows] = useState<Show[]>(initialData);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [editingId, setEditingId] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        fetchWithTimeout("/api/admin/shows")
-            .then(res => res.json())
-            .then(data => { setShows(data); setIsLoading(false); })
-            .catch(() => { alert("Veriler yüklenemedi."); setIsLoading(false); });
-    }, []);
+    const [isLoading, setIsLoading] = useState(false);
 
     const emptyForm: Partial<Show> = {
         city: "",
